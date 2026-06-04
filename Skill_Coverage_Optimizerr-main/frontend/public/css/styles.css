@@ -1,0 +1,797 @@
+/* =============================================
+   SKILL COVERAGE OPTIMIZER — Figma-accurate styles
+   ============================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap");
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary:   #F08080;
+  --secondary: #7FE7F7;
+  --bg:        #F3F3F3;
+  --white:     #FFFFFF;
+  --card-bg:   #ECEAEA;
+  --text:      #222222;
+  --text-mid:  #555555;
+  --text-gray: #828181;
+  --border:    #E0E0E0;
+}
+
+body {
+  font-family: 'Inter', 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =============================================
+   HEADER — coral banner, centered text
+   ============================================= */
+.app-header {
+  background: #EF7C78;
+  text-align: center;
+  padding: 20px 16px 22px;
+}
+.app-header h1 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 2.6rem;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+.app-header p {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: #F9F8F8;
+  margin-top: 2px;
+}
+
+/* =============================================
+   NAV — 4 icon+label tabs in a row
+   ============================================= */
+.app-nav {
+  background: var(--white);
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 12px 32px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--text);
+  transition: background 0.15s;
+}
+.nav-btn.active {
+  background: var(--white);
+  border: 1px solid #F2A7A4;
+}
+.nav-btn:hover:not(.active) { background: #f5f5f5; }
+.nav-icon { width: 36px; height: 36px; object-fit: contain; }
+.nav-icon--lg { width: 40px; height: 40px; }
+
+/* =============================================
+   MAIN LAYOUT
+   ============================================= */
+.app-main {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 28px 56px 48px;
+}
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* =============================================
+   TEAM PAGE TOOLBAR
+   ============================================= */
+.team-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.team-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* View toggle pill */
+.view-toggle {
+  display: inline-flex;
+  height: 48px;
+  border-radius: 28px;
+  border: 1px solid #FCFCFC;
+  background: #7AEAF8;
+  padding: 2px;
+  gap: 0;
+}
+.toggle-btn {
+  min-width: 154px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  border-radius: 28px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1.35rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.15s;
+  line-height: 36px;
+  padding: 0 24px;
+}
+.toggle-btn.active {
+  background: var(--white);
+  border: 1px solid #7AEAF8;
+  color: var(--text);
+}
+
+/* Employee filters */
+.emp-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.filter-input, .filter-select {
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #f9f9f9;
+  font-size: 0.85rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  outline: none;
+}
+.filter-input { width: 180px; }
+.filter-select { width: 140px; }
+
+/* ADD button (cyan pill with icon) */
+.btn-add-team {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 20px;
+  background: #7AEAF8;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: #FFFCFC;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.btn-add-team:hover { background: #5dd9ee; }
+
+/* =============================================
+   CARD GRID (2 columns)
+   ============================================= */
+.card-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 100px;
+}
+@media (max-width: 900px) {
+  .card-grid2 { grid-template-columns: 1fr; gap: 16px; }
+  .app-main { padding: 16px; }
+}
+
+/* =============================================
+   EMPLOYEE CARD — matches Figma exactly
+   ============================================= */
+.emp-card {
+  position: relative;
+  background: #ECEAEA;
+  border-radius: 10px;
+  padding: 16px;
+  overflow: hidden;
+  min-height: 140px;
+}
+/* colored left-edge accent border */
+.emp-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+  pointer-events: none;
+}
+.emp-card--green::before  { border-color: #16C60C; }
+.emp-card--yellow::before { border-color: #FFC82C; }
+.emp-card--red::before    { border-color: #FF0000; }
+
+.emp-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.emp-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #000;
+}
+.emp-role {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #828181;
+  margin-top: 2px;
+}
+.emp-del-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  color: #888;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.emp-card:hover .emp-del-btn { opacity: 1; }
+.emp-del-btn:hover { color: #f44; }
+
+/* Workload row */
+.workload-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+.workload-lbl {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  color: #828181;
+}
+.workload-bar {
+  width: 100%;
+  height: 5px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 43.81px;
+  margin-top: 2px;
+  overflow: hidden;
+}
+.workload-fill {
+  height: 100%;
+  border-radius: 43.81px;
+  transition: width 0.4s ease;
+}
+
+/* Skills row */
+.skills-row { margin-top: 10px; }
+.skills-row-lbl {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  color: #828181;
+  margin-bottom: 5px;
+}
+.skills-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 14px;
+  border-radius: 28px;
+  border: 1px solid #7AEAF8;
+  background: var(--white);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.72rem;
+  color: #000;
+  white-space: nowrap;
+  line-height: 18px;
+}
+
+/* =============================================
+   TEAM CARD — matches Figma
+   ============================================= */
+.team-card {
+  background: #ECEAEA;
+  border-radius: 10px;
+  padding: 16px;
+  min-height: 130px;
+  position: relative;
+}
+.team-card-top { display: flex; justify-content: space-between; }
+.team-id {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #000;
+}
+.team-task-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+.team-task-lbl {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  color: #555;
+}
+.badge-high   { background: #FFDDDD; color: #C00; border-radius: 20px; padding: 2px 12px; font-size: 0.75rem; font-weight: 700; }
+.badge-medium { background: #FFF3CD; color: #855600; border-radius: 20px; padding: 2px 12px; font-size: 0.75rem; font-weight: 700; }
+.badge-low    { background: #D4EDDA; color: #145726; border-radius: 20px; padding: 2px 12px; font-size: 0.75rem; font-weight: 700; }
+.badge-urgent { background: #FFDDDD; color: #900; border-radius: 20px; padding: 2px 12px; font-size: 0.75rem; font-weight: 700; }
+
+.team-progress-lbl {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.72rem;
+  color: #828181;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+.team-prog-bar { width: 100%; height: 5px; background: rgba(0,0,0,0.1); border-radius: 99px; overflow: hidden; }
+.team-prog-fill { height: 100%; border-radius: 99px; }
+.team-members-lbl {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.72rem;
+  color: #828181;
+  font-weight: 700;
+  margin-top: 8px;
+  margin-bottom: 5px;
+}
+.team-del-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #aaa;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.team-card:hover .team-del-btn { opacity: 1; }
+.team-del-btn:hover { color: #f44; }
+
+/* =============================================
+   TASKS PAGE
+   ============================================= */
+.tasks-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.section-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: var(--text);
+}
+
+.task-card {
+  background: #F5F5F5;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  border: 1px solid #E8E8E8;
+}
+.task-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.task-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.task-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #000;
+}
+.task-del-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #aaa;
+  opacity: 0;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+}
+.task-card:hover .task-del-btn { opacity: 1; }
+.task-del-btn:hover { color: #f44; }
+
+.task-body { margin-top: 4px; }
+.task-desc-lbl {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #555;
+}
+.task-desc-text {
+  font-size: 0.8rem;
+  color: #777;
+  margin-top: 1px;
+}
+.task-meta-row {
+  display: flex;
+  gap: 24px;
+  margin-top: 5px;
+}
+.task-meta-item {
+  font-size: 0.8rem;
+  color: #555;
+}
+.task-meta-item b { color: #333; }
+
+.task-skills-row { margin-top: 5px; }
+.task-skills-lbl {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+/* Status badges for tasks */
+.tbadge-unassigned { background: #F0F0F0; color: #666; border-radius: 20px; padding: 2px 10px; font-size: 0.72rem; font-weight: 700; }
+.tbadge-assigned   { background: #DBEAFE; color: #1d4ed8; border-radius: 20px; padding: 2px 10px; font-size: 0.72rem; font-weight: 700; }
+.tbadge-in_progress{ background: #FEF3C7; color: #92400e; border-radius: 20px; padding: 2px 10px; font-size: 0.72rem; font-weight: 700; }
+.tbadge-completed  { background: #D1FAE5; color: #065f46; border-radius: 20px; padding: 2px 10px; font-size: 0.72rem; font-weight: 700; }
+
+.task-assign-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.assign-select, .status-select {
+  height: 34px;
+  padding: 0 30px 0 10px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") no-repeat right 10px center;
+  font-size: 0.82rem;
+  font-family: 'Inter', sans-serif;
+  color: #555;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  flex: 1;
+  min-width: 160px;
+}
+.status-select { flex: 0 0 160px; }
+
+/* =============================================
+   DASHBOARD — Figma layout
+   ============================================= */
+.dash-wrap { }
+
+/* Top stats row */
+.dash-top-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  align-items: flex-start;
+}
+.dash-stat-box {
+  background: var(--white);
+  border-radius: 14px;
+  border: 1px solid #e8e8e8;
+  padding: 12px 20px 14px;
+  min-width: 170px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.dash-stat-box-lbl {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.dash-stat-box-val {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--text);
+}
+
+/* Main dashboard row: tasks card + donut chart */
+.dash-main-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.dash-tasks-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 20px 24px;
+  min-width: 240px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  border: 1px solid #e8e8e8;
+  flex: 0 0 auto;
+}
+.dash-tasks-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+}
+.dash-tasks-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+.dash-tasks-row-lbl { font-size: 0.9rem; color: #333; }
+.dash-tasks-row-val { font-weight: 700; font-size: 1.1rem; color: #333; }
+
+/* Donut chart container with floating percentages */
+.dash-donut-wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+}
+.donut-canvas-wrap {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  flex-shrink: 0;
+}
+.donut-canvas-wrap canvas { width: 240px !important; height: 240px !important; }
+
+/* Floating percentage labels around donut */
+.donut-label {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.donut-pct {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+.donut-lbl-text {
+  font-size: 0.75rem;
+  color: #555;
+  white-space: nowrap;
+  font-weight: 500;
+}
+.donut-label--inprogress { left: -90px; top: 50%; transform: translateY(-50%); }
+.donut-label--completed  { right: -90px; top: 40%; }
+.donut-label--pending    { bottom: -20px; left: 50%; transform: translateX(-50%); }
+
+/* =============================================
+   OPTIMIZE PAGE
+   ============================================= */
+.optimize-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.btn-generate {
+  height: 38px;
+  padding: 0 20px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-generate:hover { background: #43A047; }
+.btn-generate:disabled { background: #7FE7F7; color: #333; cursor: not-allowed; }
+
+.optimize-placeholder {
+  text-align: center;
+  padding: 80px 20px;
+  color: #888;
+  font-size: 0.95rem;
+}
+
+.opt-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  border: 1px solid #E8E8E8;
+  position: relative;
+}
+.opt-top { display: flex; align-items: flex-start; justify-content: space-between; }
+.opt-task-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #000;
+}
+.opt-assign-line {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 4px;
+}
+.opt-assign-line b { color: #000; }
+.opt-skills-row { margin-top: 6px; }
+.opt-meta-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: #777;
+}
+.opt-meta-row b { color: #444; }
+
+/* Score bar under card */
+.opt-bar { width: 100%; height: 3px; background: #eee; border-radius: 99px; margin-top: 10px; overflow: hidden; }
+.opt-bar-fill { height: 100%; border-radius: 99px; }
+
+/* Match badge */
+.badge-OPTIMAL    { background: #D1FAE5; color: #065f46; border-radius: 6px; padding: 3px 10px; font-size: 0.72rem; font-weight: 700; }
+.badge-GOOD       { background: #DBEAFE; color: #1d4ed8; border-radius: 6px; padding: 3px 10px; font-size: 0.72rem; font-weight: 700; }
+.badge-LOW-MATCH  { background: #FEF3C7; color: #92400e; border-radius: 6px; padding: 3px 10px; font-size: 0.72rem; font-weight: 700; }
+.badge-NO-MATCH   { background: #F3F4F6; color: #6b7280; border-radius: 6px; padding: 3px 10px; font-size: 0.72rem; font-weight: 700; }
+
+.opt-loading { text-align: center; padding: 60px; }
+.spinner { display: inline-block; width: 36px; height: 36px; border: 4px solid rgba(127,231,247,0.4); border-top-color: #F08080; border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 12px; }
+.opt-summary { font-size: 0.82rem; color: #888; margin-bottom: 14px; }
+.save-success { background: #D1FAE5; color: #065f46; border: 1px solid #6ee7b7; border-radius: 8px; padding: 9px 14px; font-size: 0.85rem; font-weight: 600; margin-bottom: 12px; }
+
+/* =============================================
+   MODALS — Figma style (icon header)
+   ============================================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.modal-box {
+  background: var(--white);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+.modal-hdr {
+  background: #EF7C78;
+  border-radius: 8px 8px 0 0;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+}
+.modal-fields { padding: 18px; overflow-y: auto; flex: 1; }
+.modal-field { margin-bottom: 14px; }
+.modal-field label {
+  display: block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.mfield-input {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+  background: #F8F8F8;
+  font-size: 0.85rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  outline: none;
+  transition: border 0.15s;
+}
+.mfield-input:focus { border-color: var(--primary); background: var(--white); }
+textarea.mfield-input { height: auto; padding: 8px 10px; resize: vertical; }
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 18px;
+  border-top: 1px solid #eee;
+}
+.modal-cancel {
+  height: 32px; padding: 0 18px;
+  background: transparent; border: none;
+  font-size: 0.85rem; color: #555; cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.modal-save {
+  height: 32px; padding: 0 24px;
+  background: #7AEAF8; border: none; border-radius: 4px;
+  font-size: 0.85rem; font-weight: 700; color: #1a1a1a;
+  cursor: pointer; font-family: 'Inter', sans-serif;
+  transition: background 0.15s;
+}
+.modal-save:hover { background: #5dd9ee; }
+.modal-save:disabled { opacity: 0.6; cursor: not-allowed; }
+.modal-error { color: #F44336; font-size: 0.78rem; margin-top: 4px; min-height: 14px; }
+
+/* Skill entry row (in employee modal) */
+.btn-add-skill-row {
+  background: none; border: none; color: #0ea5c0;
+  font-size: 0.8rem; font-weight: 600; cursor: pointer;
+  padding: 4px 0; margin-top: 4px;
+}
+.btn-add-skill-row:hover { color: var(--primary); }
+.skill-entry-row { display: flex; gap: 6px; margin-bottom: 6px; align-items: center; }
+.skill-entry-row select { flex: 1; }
+.skill-entry-row .prof-sel { width: 120px; flex-shrink: 0; }
+.skill-entry-rm { background: none; border: none; color: #f87171; font-size: 1.2rem; cursor: pointer; padding: 0 2px; line-height: 1; }
+.skill-entry-rm:hover { color: #dc2626; }
+
+/* Task skill picker */
+.task-skill-picker {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  border: 1px solid #e0e0e0; border-radius: 6px;
+  padding: 8px; min-height: 52px; max-height: 110px; overflow-y: auto;
+}
+.tskill-btn {
+  padding: 3px 12px; border-radius: 20px;
+  border: 1px solid #d0d0d0; background: white;
+  font-size: 0.75rem; font-weight: 500; color: #555; cursor: pointer;
+  transition: all 0.12s;
+}
+.tskill-btn:hover { border-color: var(--primary); color: var(--primary); }
+.tskill-btn.selected { background: var(--primary); border-color: var(--primary); color: white; }
+
+/* Member list in team modal */
+.member-list {
+  border: 1px solid #e0e0e0; border-radius: 6px;
+  padding: 6px; max-height: 180px; overflow-y: auto;
+}
+.member-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 6px; border-radius: 5px; cursor: pointer; font-size: 0.85rem;
+}
+.member-item:hover { background: #f5f5f5; }
+.member-item input { accent-color: var(--primary); }
+.member-role-tag { margin-left: auto; font-size: 0.72rem; color: #999; }
+
+/* =============================================
+   STATES
+   ============================================= */
+.state-msg { text-align: center; padding: 48px; color: #999; font-size: 0.9rem; grid-column: 1/-1; }
+
+/* =============================================
+   ANIMATIONS
+   ============================================= */
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.fade-in { animation: fadeIn 0.2s ease forwards; }

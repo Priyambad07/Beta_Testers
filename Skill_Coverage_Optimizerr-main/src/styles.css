@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #F08080;
+  --secondary: #7FE7F7;
+  --surface: #F8F8F8;
+  --success: #4CAF50;
+  --warning: #FFC107;
+  --danger: #F44336;
+  --text: #222;
+}
+
+body {
+  font-family: 'Inter', 'Poppins', sans-serif;
+  background-color: var(--surface);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.bg-primary { background-color: var(--primary) !important; }
+.bg-secondary { background-color: var(--secondary) !important; }
+.bg-surface { background-color: var(--surface) !important; }
+.text-primary { color: var(--primary) !important; }
+.text-secondary-dark { color: #0ea5c0; }
+
+.card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.input-field {
+  display: block;
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.875rem;
+  color: #1f2937;
+  outline: none;
+  transition: border 0.15s, box-shadow 0.15s;
+}
+
+.input-field:focus {
+  border-color: #F08080;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(240,128,128,0.15);
+}
+
+.btn-primary {
+  border-radius: 0.5rem;
+  padding: 0.45rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #1f2937;
+  background-color: #7FE7F7;
+  transition: background 0.2s, transform 0.1s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary:hover { background-color: #5dd9ee; }
+.btn-primary:active { transform: scale(0.97); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-secondary {
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background: white;
+  padding: 0.45rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  transition: background 0.15s, transform 0.1s;
+  cursor: pointer;
+}
+
+.btn-secondary:hover { background-color: #f9fafb; }
+.btn-secondary:active { transform: scale(0.97); }
+
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid #7FE7F7;
+  background: white;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.animate-spin {
+  animation: spin 0.8s linear infinite;
+}
