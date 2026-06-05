@@ -15,9 +15,9 @@ Built during Week 1 of the Xebia internship program, under the mentorship of **R
 
 | Name | Role |
 |---|---|
-| Shruti | Algorithm and Integration  |
+| Shruti | Backend  |
 | Daksh Mehrotra | Algorithm and Integration |
-| Priyambad Suman | Backend |
+| Priyambad Suman | Database |
 | Ishita Pradhan | Frontend |
 | Pranav Rai | Frontend |
 
